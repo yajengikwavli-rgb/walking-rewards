@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walk & Earn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+        <h1>🚶 Walk & Earn</h1>
+        <p class="subtitle">Turn your steps into rewards!</p>
+
+        <div class="card">
+            <p>Today's Steps</p>
+            <h2 id="steps">0</h2>
+            <button onclick="addSteps()">＋ Add Steps</button>
+        </div>
+
+        <div class="card">
+            <p>Your Points</p>
+            <h2 id="points">0</h2>
+            <p>1 point = 200 steps</p>
+        </div>
+
+        <div class="card">
+            <p>Progress to Next Point</p>
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+            <p id="progressText">0 / 200 steps</p>
+        </div>
+
+        <h2>🎁 Rewards</h2>
+
+        <div id="rewards"></div>
+
+        <h2>📜 History</h2>
+        <div id="history"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
