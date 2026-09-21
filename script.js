@@ -22,12 +22,12 @@ function updateDisplay() {
     document.getElementById("steps").textContent = steps;
     document.getElementById("points").textContent = points;
 
-    let progress = steps % 200;
-    let percentage = (progress / 200) * 100;
+    let progress = steps % 8,000;
+    let percentage = (progress / 8,000) * 100;
 
     document.getElementById("progress").style.width = percentage + "%";
     document.getElementById("progressText").textContent =
-        progress + " / 200 steps";
+        progress + " / 8,000 steps";
 
     displayRewards();
     displayHistory();
