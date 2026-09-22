@@ -235,6 +235,56 @@ function redeem(index) {
     );
 }
 
+function withdrawMoney() {
+    if (walletBalance <= 0) {
+        alert("Your wallet is empty.");
+        return;
+    }
+
+    let amount = prompt(
+        "How much would you like to withdraw?\n\n" +
+        "Available: ₱" + walletBalance.toFixed(2)
+    );
+
+    if (amount === null) return;
+
+    amount = Number(amount);
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
+
+    if (amount > walletBalance) {
+        alert("You don't have enough money in your wallet.");
+        return;
+    }
+
+    const confirmWithdraw = confirm(
+        "Withdraw ₱" + amount.toFixed(2) + " from your wallet?"
+    );
+
+    if (!confirmWithdraw) return;
+
+    walletBalance -= amount;
+    totalWithdrawn += amount;
+
+    history.unshift({
+        type: "withdrawn",
+        amount: amount,
+        date: new Date().toLocaleString()
+    });
+
+    saveData();
+    updateWalletDisplay();
+
+    alert(
+        "💸 Withdrawal recorded!\n\n" +
+        "Amount: ₱" + amount.toFixed(2) +
+        "\nRemaining Wallet: ₱" + walletBalance.toFixed(2)
+    );
+}
+
 function displayHistory() {
     const container = document.getElementById("history");
     container.innerHTML = "";
