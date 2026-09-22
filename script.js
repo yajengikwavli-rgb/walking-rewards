@@ -36,6 +36,10 @@ let steps = Number(localStorage.getItem("steps")) || 0;
 let points = Number(localStorage.getItem("points")) || 0;
 let history = JSON.parse(localStorage.getItem("history")) || [];
 
+let walletBalance = Number(localStorage.getItem("walletBalance")) || 0;
+let totalEarned = Number(localStorage.getItem("totalEarned")) || 0;
+let totalWithdrawn = Number(localStorage.getItem("totalWithdrawn")) || 0;
+
 let today = new Date().toDateString();
 let lastDate = localStorage.getItem("lastDate");
 
@@ -65,6 +69,21 @@ function saveData() {
     localStorage.setItem("history", JSON.stringify(history));
     localStorage.setItem("lastDate", today);
     localStorage.setItem("bonusClaimed", bonusClaimed);
+
+    localStorage.setItem("walletBalance", walletBalance);
+    localStorage.setItem("totalEarned", totalEarned);
+    localStorage.setItem("totalWithdrawn", totalWithdrawn);
+}
+
+function updateWalletDisplay() {
+    document.getElementById("walletBalance").textContent =
+        walletBalance.toFixed(2);
+
+    document.getElementById("totalEarned").textContent =
+        totalEarned.toFixed(2);
+
+    document.getElementById("totalWithdrawn").textContent =
+        totalWithdrawn.toFixed(2);
 }
 
 function updateDisplay() {
@@ -77,9 +96,6 @@ function updateDisplay() {
     document.getElementById("progress").style.width = percentage + "%";
     document.getElementById("progressText").textContent =
         progress + " / 8000 steps";
-
-    displayRewards();
-    displayHistory();
 }
 
 function addSteps() {
@@ -181,21 +197,36 @@ function redeem(index) {
 
     points -= reward.cost;
 
+    // Get the money amount from the reward
+    const moneyAmount = Number(
+        reward.name.replace("💵 ₱", "").replace(" Spending Money", "")
+    );
+
+    // Add money to wallet
+    walletBalance += moneyAmount;
+    totalEarned += moneyAmount;
+
     history.unshift({
         type: "redeemed",
         reward: reward.name,
         points: reward.cost,
+        money: moneyAmount,
         date: new Date().toLocaleString()
     });
 
     saveData();
     updateDisplay();
+    updateWalletDisplay();
 
     alert(
         "🎉 Redeemed!\n\n" +
         reward.name +
+        "\n\n💰 Added to Wallet: ₱" +
+        moneyAmount.toFixed(2) +
         "\n\nRemaining points: " +
-        points
+        points +
+        "\nWallet Balance: ₱" +
+        walletBalance.toFixed(2)
     );
 }
 
@@ -242,27 +273,20 @@ function showSection(section) {
     toggleMenu();
 
     if (section === "wallet") {
-        alert("💰 Wallet\n\nComing soon!");
-    } else if (section === "rewards") {
-        alert("🎁 Rewards\n\nComing soon!");
-    } else if (section === "history") {
-        alert("📜 History\n\nComing soon!");
-    } else if (section === "strength") {
-        alert("💪 Strength\n\nComing soon!");
-    } else if (section === "core") {
-        alert("🧘 Core\n\nComing soon!");
-    } else if (section === "streaks") {
-        alert("🔥 Streaks\n\nComing soon!");
-    } else if (section === "million") {
-        alert("🎯 1,000,000 Steps\n\nComing soon!");
-    } else if (section === "calories") {
-        alert("🔥 Calories Burned\n\nComing soon!");
-    } else if (section === "stats") {
-        alert("📊 Statistics\n\nComing soon!");
-    } else if (section === "achievements") {
-        alert("🏆 Achievements\n\nComing soon!");
+        document.getElementById("dashboardSection").style.display = "none";
+        document.getElementById("walletSection").style.display = "block";
+
+        updateWalletDisplay();
+    } else {
+        alert("This section is coming soon!");
     }
+}
+
+function showDashboard() {
+    document.getElementById("walletSection").style.display = "none";
+    document.getElementById("dashboardSection").style.display = "block";
 }
 
 displayDailyQuote();
 updateDisplay();
+updateWalletDisplay();
