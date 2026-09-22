@@ -214,9 +214,14 @@ function redeem(index) {
         date: new Date().toLocaleString()
     });
 
-    saveData();
+        saveData();
     updateDisplay();
     updateWalletDisplay();
+
+    if (document.getElementById("rewardsSection").style.display === "block") {
+        document.getElementById("rewardsPoints").textContent = points;
+        displayRewards();
+    }
 
     alert(
         "🎉 Redeemed!\n\n" +
@@ -274,9 +279,22 @@ function showSection(section) {
 
     if (section === "wallet") {
         document.getElementById("dashboardSection").style.display = "none";
+        document.getElementById("walletSection").style.display = "none";
+        document.getElementById("rewardsSection").style.display = "none";
+
         document.getElementById("walletSection").style.display = "block";
 
         updateWalletDisplay();
+
+    } else if (section === "rewards") {
+        document.getElementById("dashboardSection").style.display = "none";
+        document.getElementById("walletSection").style.display = "none";
+        document.getElementById("rewardsSection").style.display = "block";
+
+        document.getElementById("rewardsPoints").textContent = points;
+
+        displayRewards();
+
     } else {
         alert("This section is coming soon!");
     }
@@ -284,7 +302,10 @@ function showSection(section) {
 
 function showDashboard() {
     document.getElementById("walletSection").style.display = "none";
+    document.getElementById("rewardsSection").style.display = "none";
     document.getElementById("dashboardSection").style.display = "block";
+
+    updateDisplay();
 }
 
 displayDailyQuote();
