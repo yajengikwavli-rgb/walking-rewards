@@ -233,5 +233,36 @@ function displayHistory() {
     });
 }
 
+function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    menu.classList.toggle("open");
+}
+
+function showSection(section) {
+    toggleMenu();
+
+    if (section === "wallet") {
+        alert("💰 Wallet\n\nComing soon!");
+    } else if (section === "rewards") {
+        alert("🎁 Rewards\n\nComing soon!");
+    } else if (section === "history") {
+        alert("📜 History\n\nComing soon!");
+    } else if (section === "strength") {
+        alert("💪 Strength\n\nComing soon!");
+    } else if (section === "core") {
+        alert("🧘 Core\n\nComing soon!");
+    } else if (section === "streaks") {
+        alert("🔥 Streaks\n\nComing soon!");
+    } else if (section === "million") {
+        alert("🎯 1,000,000 Steps\n\nComing soon!");
+    } else if (section === "calories") {
+        alert("🔥 Calories Burned\n\nComing soon!");
+    } else if (section === "stats") {
+        alert("📊 Statistics\n\nComing soon!");
+    } else if (section === "achievements") {
+        alert("🏆 Achievements\n\nComing soon!");
+    }
+}
+
 displayDailyQuote();
 updateDisplay();
