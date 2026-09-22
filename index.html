@@ -50,32 +50,66 @@
     <!-- Main App -->
     <div class="app">
 
-        <h1>🚶 Walk & Earn</h1>
-        <p class="subtitle">Turn your steps into rewards!</p>
+        <!-- Dashboard -->
+        <div id="dashboardSection">
 
-        <div class="quote-card">
-            <p>💬 Quote of the Day</p>
-            <h3 id="dailyQuote">Loading...</h3>
-        </div>
+            <h1>🚶 Walk & Earn</h1>
+            <p class="subtitle">Turn your steps into rewards!</p>
 
-        <div class="card">
-            <p>Today's Steps</p>
-            <h2 id="steps">0</h2>
-            <button onclick="addSteps()">＋ Add Steps</button>
-        </div>
-
-        <div class="card">
-            <p>Your Points</p>
-            <h2 id="points">0</h2>
-            <p>1 point = 200 steps</p>
-        </div>
-
-        <div class="card">
-            <p>Progress to My Goal</p>
-            <div class="progress-bar">
-                <div id="progress"></div>
+            <div class="quote-card">
+                <p>💬 Quote of the Day</p>
+                <h3 id="dailyQuote">Loading...</h3>
             </div>
-            <p id="progressText">0 / 8,000 steps</p>
+
+            <div class="card">
+                <p>Today's Steps</p>
+                <h2 id="steps">0</h2>
+                <button onclick="addSteps()">＋ Add Steps</button>
+            </div>
+
+            <div class="card">
+                <p>Your Points</p>
+                <h2 id="points">0</h2>
+                <p>1 point = 200 steps</p>
+            </div>
+
+            <div class="card">
+                <p>Progress to My Goal</p>
+                <div class="progress-bar">
+                    <div id="progress"></div>
+                </div>
+                <p id="progressText">0 / 8,000 steps</p>
+            </div>
+
+        </div>
+
+        <!-- Wallet Section -->
+        <div id="walletSection" class="page-section" style="display: none;">
+
+            <div class="page-header">
+                <button onclick="showDashboard()">← Back</button>
+                <h2>💰 Wallet</h2>
+            </div>
+
+            <div class="wallet-card">
+                <p>Current Balance</p>
+                <h2>₱<span id="walletBalance">0.00</span></h2>
+            </div>
+
+            <div class="card">
+                <p>Total Earned</p>
+                <h2>₱<span id="totalEarned">0.00</span></h2>
+            </div>
+
+            <div class="card">
+                <p>Total Withdrawn</p>
+                <h2>₱<span id="totalWithdrawn">0.00</span></h2>
+            </div>
+
+            <div class="card">
+                <button onclick="withdrawMoney()">💸 Withdraw Money</button>
+            </div>
+
         </div>
 
     </div>
