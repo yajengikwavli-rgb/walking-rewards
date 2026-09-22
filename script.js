@@ -2,6 +2,16 @@ let steps = Number(localStorage.getItem("steps")) || 0;
 let points = Number(localStorage.getItem("points")) || 0;
 let history = JSON.parse(localStorage.getItem("history")) || [];
 
+let today = new Date().toDateString();
+let lastDate = localStorage.getItem("lastDate");
+
+// Reset today's steps if the date has changed
+if (lastDate !== today) {
+    steps = 0;
+    localStorage.setItem("steps", steps);
+    localStorage.setItem("lastDate", today);
+}
+
 const rewards = [
     { name: "🍟 Chichirya", cost: 150 },
     { name: "🥟 5 pcs Siomai", cost: 200 },
@@ -16,6 +26,7 @@ function saveData() {
     localStorage.setItem("steps", steps);
     localStorage.setItem("points", points);
     localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("lastDate", today);
 }
 
 function updateDisplay() {
