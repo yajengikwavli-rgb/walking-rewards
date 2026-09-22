@@ -1,3 +1,37 @@
+const motivationalQuotes = [
+    "Small steps every day add up to big results.",
+    "You don't have to be perfect. You just have to keep going.",
+    "Your future self will thank you for what you do today.",
+    "Consistency beats motivation.",
+    "One step at a time. Keep moving forward.",
+    "Progress is still progress, no matter how small.",
+    "Discipline is choosing what you want most over what you want now.",
+    "You are capable of more than you think.",
+    "Don't stop when you're tired. Stop when you're done.",
+    "Every step counts.",
+    "A little progress each day adds up to a lot.",
+    "You don't need to feel motivated to make progress.",
+    "Keep showing up for yourself.",
+    "Your only competition is who you were yesterday.",
+    "Start where you are. Keep moving.",
+    "Hard days count too. Keep going.",
+    "Believe in the progress you cannot see yet.",
+    "The goal isn't perfection. The goal is consistency.",
+    "Future you is built by what you do today.",
+    "You've got this. One day at a time."
+];
+
+function displayDailyQuote() {
+    let dayNumber = Math.floor(
+        new Date().getTime() / (1000 * 60 * 60 * 24)
+    );
+
+    let quoteIndex = dayNumber % motivationalQuotes.length;
+
+    document.getElementById("dailyQuote").textContent =
+        motivationalQuotes[quoteIndex];
+}
+
 let steps = Number(localStorage.getItem("steps")) || 0;
 let points = Number(localStorage.getItem("points")) || 0;
 let history = JSON.parse(localStorage.getItem("history")) || [];
@@ -199,4 +233,5 @@ function displayHistory() {
     });
 }
 
+displayDailyQuote();
 updateDisplay();
