@@ -9,14 +9,54 @@
 
 <body>
 
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+
+    <!-- Side Menu -->
+    <div id="sideMenu" class="side-menu">
+        <div class="menu-header">
+            <h2>☰ Walk & Earn</h2>
+            <button class="close-button" onclick="toggleMenu()">×</button>
+        </div>
+
+        <div class="menu-profile">
+            <div class="profile-icon">👤</div>
+            <div>
+                <h3>Gabrielle</h3>
+                <p>Walk & Earn Member</p>
+            </div>
+        </div>
+
+        <div class="menu-items">
+            <button onclick="showSection('wallet')">💰 Wallet</button>
+            <button onclick="showSection('rewards')">🎁 Rewards</button>
+            <button onclick="showSection('history')">📜 History</button>
+
+            <hr>
+
+            <button onclick="showSection('strength')">💪 Strength</button>
+            <button onclick="showSection('core')">🧘 Core</button>
+            <button onclick="showSection('streaks')">🔥 Streaks</button>
+
+            <hr>
+
+            <button onclick="showSection('million')">🎯 1,000,000 Steps</button>
+            <button onclick="showSection('calories')">🔥 Calories Burned</button>
+            <button onclick="showSection('stats')">📊 Statistics</button>
+            <button onclick="showSection('achievements')">🏆 Achievements</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
     <div class="app">
+
         <h1>🚶 Walk & Earn</h1>
         <p class="subtitle">Turn your steps into rewards!</p>
-        
+
         <div class="quote-card">
-    <p>💬 Quote of the Day</p>
-    <h3 id="dailyQuote">Loading...</h3>
-</div>
+            <p>💬 Quote of the Day</p>
+            <h3 id="dailyQuote">Loading...</h3>
+        </div>
 
         <div class="card">
             <p>Today's Steps</p>
@@ -38,12 +78,6 @@
             <p id="progressText">0 / 8,000 steps</p>
         </div>
 
-        <h2>🎁 Rewards</h2>
-
-        <div id="rewards"></div>
-
-        <h2>📜 History</h2>
-        <div id="history"></div>
     </div>
 
     <script src="script.js"></script>
