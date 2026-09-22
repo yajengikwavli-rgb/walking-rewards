@@ -6,10 +6,15 @@ let today = new Date().toDateString();
 let lastDate = localStorage.getItem("lastDate");
 
 // Reset today's steps if the date has changed
+let bonusClaimed = localStorage.getItem("bonusClaimed") === "true";
+
 if (lastDate !== today) {
     steps = 0;
+    bonusClaimed = false;
+
     localStorage.setItem("steps", steps);
     localStorage.setItem("lastDate", today);
+    localStorage.setItem("bonusClaimed", "false");
 }
 
 const rewards = [
@@ -27,6 +32,7 @@ function saveData() {
     localStorage.setItem("points", points);
     localStorage.setItem("history", JSON.stringify(history));
     localStorage.setItem("lastDate", today);
+    localStorage.setItem("bonusClaimed", bonusClaimed);
 }
 
 function updateDisplay() {
@@ -64,6 +70,19 @@ function addSteps() {
     let earned = newPoints - oldPoints;
 
     points += earned;
+    let bonusEarned = false;
+
+if (steps >= 8000 && !bonusClaimed) {
+    points += 10;
+    bonusClaimed = true;
+    bonusEarned = true;
+
+    history.unshift({
+        type: "bonus",
+        points: 10,
+        date: new Date().toLocaleString()
+    });
+}
 
     history.unshift({
         type: "earned",
@@ -75,10 +94,18 @@ function addSteps() {
     saveData();
     updateDisplay();
 
+    if (bonusEarned) {
+    alert(
+        "🎉 Daily Goal Reached!\n\n" +
+        "You earned " + earned + " point(s) from your steps.\n" +
+        "🎁 +10 bonus points!"
+    );
+} else {
     alert(
         "You added " + amount + " steps!\n" +
         "You earned " + earned + " point(s)."
     );
+}
 }
 
 function displayRewards() {
@@ -154,18 +181,22 @@ function displayHistory() {
         div.className = "history-item";
 
         if (item.type === "earned") {
-            div.innerHTML =
-                "🚶 +" + item.steps + " steps → +" +
-                item.points + " points<br>" +
-                "<small>" + item.date + "</small>";
-        } else {
-            div.innerHTML =
-                "🎁 Redeemed " + item.reward +
-                " → -" + item.points +
-                " points<br>" +
-                "<small>" + item.date + "</small>";
-        }
-
+    div.innerHTML =
+        "🚶 +" + item.steps + " steps → +" +
+        item.points + " points<br>" +
+        "<small>" + item.date + "</small>";
+} else if (item.type === "bonus") {
+    div.innerHTML =
+        "🎯 Daily Goal Bonus → +" +
+        item.points + " points<br>" +
+        "<small>" + item.date + "</small>";
+} else {
+    div.innerHTML =
+        "🎁 Redeemed " + item.reward +
+        " → -" + item.points + " points<br>" +
+        "<small>" + item.date + "</small>";
+}
+        
         container.appendChild(div);
     });
 }
