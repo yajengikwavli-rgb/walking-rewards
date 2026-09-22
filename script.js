@@ -18,13 +18,11 @@ if (lastDate !== today) {
 }
 
 const rewards = [
-    { name: "🍟 Chichirya", cost: 150 },
-    { name: "🥟 5 pcs Siomai", cost: 200 },
-    { name: "🍔 Burger", cost: 350 },
-    { name: "🍟 Fries", cost: 400 },
-    { name: "💵 ₱200", cost: 600 },
-    { name: "💵 ₱300", cost: 750 },
-    { name: "🎧 New Earbuds", cost: 1500 }
+    { name: "💵 ₱20 Spending Money", cost: 85 },
+    { name: "💵 ₱50 Spending Money", cost: 210 },
+    { name: "💵 ₱100 Spending Money", cost: 420 },
+    { name: "💵 ₱200 Spending Money", cost: 840 },
+    { name: "💵 ₱500 Spending Money", cost: 2100 }
 ];
 
 function saveData() {
