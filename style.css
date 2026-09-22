@@ -25,6 +25,27 @@ h1 {
     margin-bottom: 25px;
 }
 
+.quote-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.quote-card p {
+    margin: 0 0 10px;
+    font-weight: bold;
+}
+
+.quote-card h3 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    font-style: italic;
+}
+
 .card {
     background: white;
     padding: 20px;
